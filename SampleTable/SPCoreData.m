@@ -113,6 +113,7 @@
 - (void)onClickAddButton:(id)sender withEvent:(UIEvent *)event
 {
     [self _settingCoreData];
+//    NSLog(@"push addButton....");
 }
 
 
