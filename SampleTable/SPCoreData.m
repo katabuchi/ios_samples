@@ -89,6 +89,10 @@
     
     [self.view addSubview:textField];
     [self.view addSubview:addButton];
+    
+    UIView *backView = [[UIView alloc] init];
+    [backView setFrame:self.view.frame];
+    [backView setBackgroundColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0]];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -113,6 +117,7 @@
 - (void)onClickAddButton:(id)sender withEvent:(UIEvent *)event
 {
     [self _settingCoreData];
+//    NSLog(@"push addButton....");
 }
 
 
