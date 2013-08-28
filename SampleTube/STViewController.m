@@ -36,6 +36,7 @@
     [youtubeOAuth setScope:@"https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.upload"];
     [youtubeOAuth setDelegate:self];
     [testTube readList];
+    [youtubeOAuth signIn];
 }
 
 - (void)didReceiveMemoryWarning

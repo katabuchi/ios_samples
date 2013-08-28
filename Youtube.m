@@ -50,6 +50,34 @@
     [_delegate youtube:self didRecieveList:ticket withFeed:aFeed error:error];
 }
 
+- (void)upLoadVideo:(NSString *)path
+{
+    GDataEntryYouTubeVideo *entry = [GDataEntryYouTubeVideo videoEntry];
+    NSString *pathString = path;
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    if(data){
+        NSString *fileName = [path lastPathComponent];
+        [entry setUploadData:data];
+        [entry setUploadSlug:fileName];
+        [entry setUploadMIMEType:@"video/mp4"];
+        
+        NSString *title = [[NSFileManager defaultManager] displayNameAtPath:pathString];
+        [entry setTitleWithString:title];
+        
+        NSURL *uploadURL = [GDataServiceGoogleYouTube youTubeUploadURLForUserID:@"yafvLSb6AIQ-YOYKm6BDvw"];
+//        NSURL *uploadURL = [GDataServiceGoogleYouTube youTubeUploadURLForUserID:[self.authentication userID]];
+        
+        GDataServiceGoogleYouTube *service = [[GDataServiceGoogleYouTube alloc] init];
+        [service setYouTubeDeveloperKey:@"AI39si78J7MYMDXBhJR6UHNGHe1xl9J7-Jq6ElVAnj6tSNV81ctAr-7LLwKfQM1vl774H-mBBja7Dl-WEmE22vVmC7WVDSMI7Q"];
+        [service setServiceUploadProgressSelector:nil];
+        GDataServiceTicket *ticket = [service fetchEntryByInsertingEntry:entry
+                                                              forFeedURL:uploadURL
+                                                                delegate:self
+                                                       didFinishSelector:@selector(uploadTicket:finishedWithEntry:error:)];
+        [self setUpLloadTicket:ticket];
+    }
+}
+
 - (void)upLoadVideoFilePath:(NSString *)movieURL parameters:(NSDictionary *)parameters
 {
     NSString *movieTitleString = [parameters objectForKey:@"title"];
@@ -66,8 +94,11 @@
     if([self.authentication canAuthorize]){
         NSURL *url = [GDataServiceGoogleYouTube youTubeUploadURLForUserID:@"default"];
         NSLog(@"URLの情報%@",url);
-        NSString *path = [[NSBundle mainBundle] pathForResource:movieURL ofType:@"mov"];
-        NSData *data = [NSData dataWithContentsOfMappedFile:path];
+//        NSString *path = [[NSBundle mainBundle] pathForResource:movieURL ofType:@"mov"];
+//        NSData *data = [NSData dataWithContentsOfMappedFile:path];
+        
+        NSString *path = movieURL;
+        NSData *data = [NSData dataWithContentsOfFile:path];
         NSString *fileName = [path lastPathComponent];
         
         GDataMediaTitle *title = [GDataMediaTitle textConstructWithString:movieTitleString];
@@ -81,7 +112,8 @@
         
         BOOL isPrivate = YES;
         
-        GDataServiceGoogleYouTube *service = [self youtubeService];
+//        GDataServiceGoogleYouTube *service = [self youtubeService];
+        GDataServiceGoogleYouTube *service = [[GDataServiceGoogleYouTube alloc] init];
         GDataYouTubeMediaGroup *mediaGroup = [GDataYouTubeMediaGroup mediaGroup];
         [mediaGroup setMediaTitle:title];
         [mediaGroup setMediaCategories:categoryArray];
@@ -90,17 +122,20 @@
         [mediaGroup setIsPrivate:isPrivate];
         
         NSString *mimeType = [GDataUtilities MIMETypeForFileAtPath:path defaultMIMEType:@"video/mov"];
+        
         GDataEntryYouTubeUpload *entry = [GDataEntryYouTubeUpload uploadEntryWithMediaGroup:mediaGroup
                                                                                        data:data
                                                                                    MIMEType:mimeType
                                                                                        slug:fileName];
         
+        
         SEL progressSel = @selector(ticket:hasDeliveredByteCount:ofTotalByteCount:);
         [service setServiceUploadProgressSelector:progressSel];
-        
+        [service setYouTubeDeveloperKey:@"AI39si78J7MYMDXBhJR6UHNGHe1xl9J7-Jq6ElVAnj6tSNV81ctAr-7LLwKfQM1vl774H-mBBja7Dl-WEmE22vVmC7WVDSMI7Q"];
         GDataServiceTicket *ticket = [service fetchEntryByInsertingEntry:entry
                                                               forFeedURL:url
-                                                                delegate:self didFinishSelector:@selector(uploadTicket:finishedWithEntry:error:)];
+                                                                delegate:self
+                                                       didFinishSelector:@selector(uploadTicket:finishedWithEntry:error:)];
         [self setUpLloadTicket:ticket];
         
         GTMHTTPUploadFetcher *uploadFetcher = (GTMHTTPUploadFetcher *)[ticket objectFetcher];
@@ -131,12 +166,21 @@
 - (void)uploadTicket:(GDataServiceTicket *)ticket finishedWithEntry:(GDataEntryYouTubeVideo *)videoEntry error:(NSError *)error
 {
     if(error == nil){
-        NSLog(@"notエラー%@",error);
+        NSLog(@"成功");
     }else{
         NSLog(@"エラー%@",error);
     }
     
     [self setUpLloadTicket:nil];
 }
+
+- (void)ticket:(GDataServiceTicket *)ticket hasDeliveredByteCount:(unsigned long long)numberOfBytesRead ofTotalByteCount:(unsigned long long)dataLength
+{
+    NSLog(@"進捗率");
+}
+
+
+
+
 
 @end

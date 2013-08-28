@@ -102,7 +102,8 @@
         NSLog(@"ログイン済み");
         Youtube *youtube = [[Youtube alloc] init];
         [youtube setAuthentication:[youtubeOAuth authentication]];
-        [youtube upLoadVideoFilePath:@"test" parameters:@{@"title": @"test", @"category": @"animal", @"description": @"test", @"keyword": @"test"}];
+//        [youtube upLoadVideo:moviePath];
+        [youtube upLoadVideoFilePath:moviePath parameters:@{@"title": @"test", @"category": @"animal", @"description": @"test", @"keyword": @"test"}];
     }else{
         [youtubeOAuth signIn];
     }
@@ -118,11 +119,15 @@
     }];
     if([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.movie"]){
         NSURL *movieURL = [info objectForKey:UIImagePickerControllerMediaURL];
+        moviePath = [[info objectForKey:UIImagePickerControllerMediaURL] path];
         AVPlayer *player = [AVPlayer playerWithURL:movieURL];
         AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
         [playerLayer setFrame:photoView.bounds];
         [playerLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
         [photoView.layer addSublayer:playerLayer];
+        
+        
+        
     }else{
         UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
         [photoView setImage:originalImage];

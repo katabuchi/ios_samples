@@ -11,5 +11,6 @@
 @interface STPostViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UIImageView *photoView;
+    NSString *moviePath;
 }
 @end

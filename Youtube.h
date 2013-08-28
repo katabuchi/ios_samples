@@ -31,4 +31,8 @@
 - (void)getVideo;
 - (void)upLoadVideoFilePath:(NSString *)movieURL parameters:(NSDictionary *)parameters;
 - (void)readList;
+
+- (void)upLoadVideo:(NSString *)path;
+
+
 @end
