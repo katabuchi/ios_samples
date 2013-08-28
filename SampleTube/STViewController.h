@@ -15,5 +15,6 @@
     UITableViewController *tableViewController;
     YoutubeOAuth *youtubeOAuth;
     Youtube *testTube;
+    NSMutableArray *entries;
 }
 @end

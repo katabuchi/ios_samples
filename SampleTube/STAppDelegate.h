@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class STViewController,STPostViewController;
+@class STViewController, STPostViewController;
 
 @interface STAppDelegate : UIResponder <UIApplicationDelegate>
 

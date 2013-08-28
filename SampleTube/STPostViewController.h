@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STPostViewController : UIViewController
-
+@interface STPostViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+{
+    UIImageView *photoView;
+}
 @end

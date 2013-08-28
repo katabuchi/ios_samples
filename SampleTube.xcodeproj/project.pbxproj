@@ -25,6 +25,8 @@
 		8A424C6817CB225300E2CF6C /* YoutubeOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A424C6717CB225300E2CF6C /* YoutubeOAuth.m */; };
 		8A424C6A17CB24B800E2CF6C /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A424C6917CB24B800E2CF6C /* GTMOAuth2ViewTouch.xib */; };
 		8A424C7017CB305200E2CF6C /* Youtube.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A424C6F17CB305200E2CF6C /* Youtube.m */; };
+		8A5357EE17CD965F00810271 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5357ED17CD965F00810271 /* QuartzCore.framework */; };
+		8A5357F417CDB23A00810271 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5357F317CDB23A00810271 /* AVFoundation.framework */; };
 		8AC870F817CC49AA00B4E94B /* STPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC870F717CC49AA00B4E94B /* STPostViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -413,6 +415,8 @@
 		8A424C6917CB24B800E2CF6C /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GTMOAuth2ViewTouch.xib; path = SampleTube/GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		8A424C6E17CB305200E2CF6C /* Youtube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Youtube.h; sourceTree = "<group>"; };
 		8A424C6F17CB305200E2CF6C /* Youtube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Youtube.m; sourceTree = "<group>"; };
+		8A5357ED17CD965F00810271 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8A5357F317CDB23A00810271 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8AC870F617CC49AA00B4E94B /* STPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostViewController.h; sourceTree = "<group>"; };
 		8AC870F717CC49AA00B4E94B /* STPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -422,6 +426,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A5357F417CDB23A00810271 /* AVFoundation.framework in Frameworks */,
+				8A5357EE17CD965F00810271 /* QuartzCore.framework in Frameworks */,
 				8A424B2917CB215600E2CF6C /* libGDataTouchStaticLib.a in Frameworks */,
 				8A424B1217CB1E2500E2CF6C /* SystemConfiguration.framework in Frameworks */,
 				8A424B1017CB1E0800E2CF6C /* Security.framework in Frameworks */,
@@ -455,6 +461,8 @@
 		8A424AD017CB1D7800E2CF6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A5357F317CDB23A00810271 /* AVFoundation.framework */,
+				8A5357ED17CD965F00810271 /* QuartzCore.framework */,
 				8A424B1117CB1E2500E2CF6C /* SystemConfiguration.framework */,
 				8A424B0F17CB1E0800E2CF6C /* Security.framework */,
 				8A424AD117CB1D7800E2CF6C /* UIKit.framework */,

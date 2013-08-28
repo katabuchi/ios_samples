@@ -12,6 +12,29 @@
 
 #define GoogleAuthURL   @"https://accounts.google.com/o/oauth2/auth"
 #define GoogleTokenURL  @"https://accounts.google.com/o/oauth2/token"
+static YoutubeOAuth *sharedYoutubeOAuth = nil;
+
++ (YoutubeOAuth *)sharedYoutubeOAuth
+{
+    @synchronized(self){
+        if(sharedYoutubeOAuth == nil){
+            sharedYoutubeOAuth = [[self alloc] init];
+        }
+    }
+    return sharedYoutubeOAuth;
+}
+
++ (id)allocWithZone:(NSZone *)zone
+{
+    @synchronized(self){
+        if(sharedYoutubeOAuth == nil){
+            sharedYoutubeOAuth = [super allocWithZone:zone];
+            return sharedYoutubeOAuth;
+        }
+    }
+    return nil;
+}
+
 
 - (GTMOAuth2Authentication *)authForGoogle
 {
@@ -23,7 +46,6 @@
                                                              clientID:_googleClientID
                                                          clientSecret:_googleClientSecret];
     [auth setScope:[self scope]];
-    self.authentication = auth;
     return auth;
 }
 
@@ -34,14 +56,13 @@
 
 - (void)signIn
 {
-    GTMOAuth2Authentication *auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:[self keychainForName] clientID:[self googleClientID] clientSecret:[self googleClientSecret]];
-    if([auth canAuthorize]){
+    if([self isLogin]){
         
     }else{
         GTMOAuth2ViewControllerTouch *viewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:[self authForGoogle]
                                                                                                     authorizationURL:[self authorizationURL]
                                                                                                     keychainItemName:[self keychainForName]
-                                                                                                            delegate:self.delegate
+                                                                                                            delegate:self
                                                                                                     finishedSelector:@selector(viewController:finishedWithAuth:error:)];
         [_delegate youtubeOAuth:self didCreateAuth2ViewControllerTouch:viewController];
     }
@@ -49,11 +70,30 @@
 
 - (void)signOut
 {
-    GTMOAuth2Authentication *auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:[self keychainForName] clientID:[self googleClientID] clientSecret:[self googleClientSecret]];
-    if([auth canAuthorize]){
+    if([self isLogin]){
         [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:[self keychainForName]];
-        [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:auth];
+        [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.authentication];
     }
 }
+
+- (BOOL)isLogin
+{
+    GTMOAuth2Authentication *auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:[self keychainForName] clientID:[self googleClientID] clientSecret:[self googleClientSecret]];
+    [self setAuthentication:auth];
+    
+    if([auth canAuthorize]){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+#pragma mark -
+#pragma mark ---- GTMOAuth2ViewControllerTouch CallBackMethod ----
+- (void)viewController:(GTMOAuth2ViewControllerTouch * )viewController finishedWithAuth:(GTMOAuth2Authentication * )auth error:(NSError * )error
+{
+    [_delegate youtubeOAuth:self didFinishedWithOAuthController:viewController authentication:auth error:error];
+}
+
 
 @end
