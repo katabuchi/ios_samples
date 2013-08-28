@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STViewController : UIViewController
+@class YoutubeOAuth,Youtube;
 
+@interface STViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
+{
+    UITableViewController *tableViewController;
+    YoutubeOAuth *youtubeOAuth;
+    Youtube *testTube;
+}
 @end

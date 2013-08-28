@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class STViewController;
+@class STViewController,STPostViewController;
 
 @interface STAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (strong, nonatomic) STViewController *viewController;
+@property (strong, nonatomic) UINavigationController *navigationController;
+@property (strong, nonatomic) UITabBarController *tabBarController;
+@property (strong, nonatomic) STPostViewController *postViewController;
 
 @end

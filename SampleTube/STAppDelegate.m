@@ -7,7 +7,7 @@
 //
 
 #import "STAppDelegate.h"
-
+#import "STPostViewController.h"
 #import "STViewController.h"
 
 @implementation STAppDelegate
@@ -21,7 +21,15 @@
     } else {
         self.viewController = [[STViewController alloc] initWithNibName:@"STViewController_iPad" bundle:nil];
     }
-    self.window.rootViewController = self.viewController;
+    
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.postViewController = [[STPostViewController alloc] init];
+    
+    NSArray *viewControllers = @[self.navigationController,self.postViewController];
+    [self.tabBarController setViewControllers:viewControllers];
+    
+    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
 }
