@@ -29,7 +29,8 @@
     GDataServiceGoogleYouTube *service = [self youtubeService];
     NSURL *feedURL = [GDataServiceGoogleYouTube youTubeURLForFeedID:nil];
     GDataQueryYouTube *query = [GDataQueryYouTube youTubeQueryWithFeedURL:feedURL];
-    [query setStartIndex:1];
+    NSInteger randomNum = arc4random()%100;
+    [query setStartIndex:randomNum];
     [query setMaxResults:10];
     [query setVideoQuery:searchString];
     [query setOrderBy:@"published"];
