@@ -20,10 +20,6 @@
 
 @interface YoutubeOAuth : NSObject
 
-@property (nonatomic, strong) NSString *googleClientID;
-@property (nonatomic, strong) NSString *googleClientSecret;
-@property (nonatomic, strong) NSString *scope;
-@property (nonatomic, strong) NSString *keychainForName;
 @property (nonatomic, strong) GTMOAuth2Authentication *authentication;
 @property (nonatomic, weak) id<YoutubeOAuthDelegate>delegate;
 

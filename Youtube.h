@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class GData,Youtube, GTMOAuth2Authentication, GDataServiceTicket, GDataServiceGoogleYouTube, GDataFeedBase;
+@class GData,Youtube, GTMOAuth2Authentication, GDataServiceTicket, GDataServiceGoogleYouTube, GDataFeedBase, GDataServiceTicket;
 @protocol YoutubeDelegate <NSObject>
 @optional
 - (void)youtube:(Youtube *)youtube didRecieveData:(NSData *)data;
 - (void)youtube:(Youtube *)youtube didRecieveList:(GDataServiceTicket *)ticket withFeed:(GDataFeedBase *)aFeed error:(NSError *)error;
+- (void)youtube:(Youtube *)youtube recievingDataTicket:(GDataServiceTicket *)ticket hasDeliveredByteCount:(unsigned long long)numberOfBytesRead ofTotalByteCount:(unsigned long long)dataLength;
 @end
 
 @interface Youtube : NSObject<NSURLConnectionDataDelegate>
@@ -27,12 +28,9 @@
 @property (nonatomic, strong) GDataServiceGoogleYouTube *youtubeService;
 @property (nonatomic, strong) NSURL *uploadLocationURL;
 
-- (void)getLists:(GTMOAuth2Authentication *)authentication;
-- (void)getVideo;
+@property (nonatomic, strong) NSString *accessToken;
+
 - (void)upLoadVideoFilePath:(NSString *)movieURL parameters:(NSDictionary *)parameters;
-- (void)readList;
-
-- (void)upLoadVideo:(NSString *)path;
-
+- (void)getFeedList;
 
 @end

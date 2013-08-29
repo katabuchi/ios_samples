@@ -102,8 +102,8 @@
         NSLog(@"ログイン済み");
         Youtube *youtube = [[Youtube alloc] init];
         [youtube setAuthentication:[youtubeOAuth authentication]];
-//        [youtube upLoadVideo:moviePath];
-        [youtube upLoadVideoFilePath:moviePath parameters:@{@"title": @"test", @"category": @"animal", @"description": @"test", @"keyword": @"test"}];
+        NSDictionary *parameters = @{@"title": @"test", @"category": @"Sports", @"description": @"test", @"keyword": @"test"};
+        [youtube upLoadVideoFilePath:moviePath parameters:parameters];
     }else{
         [youtubeOAuth signIn];
     }
@@ -125,9 +125,6 @@
         [playerLayer setFrame:photoView.bounds];
         [playerLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
         [photoView.layer addSublayer:playerLayer];
-        
-        
-        
     }else{
         UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
         [photoView setImage:originalImage];

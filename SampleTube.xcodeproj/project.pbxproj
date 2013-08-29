@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A4042EF17CF1B7C009B965C /* YoutubeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4042EE17CF1B7C009B965C /* YoutubeConfig.m */; };
 		8A424AD217CB1D7800E2CF6C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A424AD117CB1D7800E2CF6C /* UIKit.framework */; };
 		8A424AD417CB1D7800E2CF6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A424AD317CB1D7800E2CF6C /* Foundation.framework */; };
 		8A424AD617CB1D7800E2CF6C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A424AD517CB1D7800E2CF6C /* CoreGraphics.framework */; };
@@ -30,7 +31,48 @@
 		C0111A8317CE17AB00B5A9EE /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0111A8217CE17AB00B5A9EE /* libGDataTouchStaticLib.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8A4042E317CEE0D9009B965C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4042DB17CEE0D8009B965C /* GData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F38F6A60B66E91D00B24B81;
+			remoteInfo = GDataFramework;
+		};
+		8A4042E517CEE0D9009B965C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4042DB17CEE0D8009B965C /* GData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F1C6E0F1027B3CE00B46459;
+			remoteInfo = GDataTouchStaticLib;
+		};
+		8A4042E717CEE0D9009B965C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4042DB17CEE0D8009B965C /* GData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F14A9DD0B1276B70072EBB8;
+			remoteInfo = GDataUnitTests;
+		};
+		8A4042E917CEE0D9009B965C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4042DB17CEE0D8009B965C /* GData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F85E018103B83B700B4C418;
+			remoteInfo = GDataIPhoneUnitTests;
+		};
+		8A4042EB17CEE0D9009B965C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4042DB17CEE0D8009B965C /* GData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F1AD9020B71603F00DC0485;
+			remoteInfo = DevelopmentTestTool;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		8A4042DB17CEE0D8009B965C /* GData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GData.xcodeproj; path = "../../../gdata-objc-client/Source/GData.xcodeproj"; sourceTree = "<group>"; };
+		8A4042ED17CF1B7C009B965C /* YoutubeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoutubeConfig.h; sourceTree = "<group>"; };
+		8A4042EE17CF1B7C009B965C /* YoutubeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YoutubeConfig.m; sourceTree = "<group>"; };
 		8A424ACE17CB1D7800E2CF6C /* SampleTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A424AD117CB1D7800E2CF6C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8A424AD317CB1D7800E2CF6C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -373,7 +415,6 @@
 		8A5357F317CDB23A00810271 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8AC870F617CC49AA00B4E94B /* STPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostViewController.h; sourceTree = "<group>"; };
 		8AC870F717CC49AA00B4E94B /* STPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostViewController.m; sourceTree = "<group>"; };
-		C0111A7017CE176C00B5A9EE /* GData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GData.xcodeproj; path = "../../../../../Documents/Xcode/library/youtube/gdata-objc-client/Source/GData.xcodeproj"; sourceTree = "<group>"; };
 		C0111A8217CE17AB00B5A9EE /* libGDataTouchStaticLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGDataTouchStaticLib.a; path = "../../../../../Documents/Xcode/library/youtube/gdata-objc-client/Source/build/Release-iphoneos/libGDataTouchStaticLib.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -396,6 +437,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A4042DC17CEE0D8009B965C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8A4042E417CEE0D9009B965C /* GData.framework */,
+				8A4042E617CEE0D9009B965C /* libGDataTouchStaticLib.a */,
+				8A4042E817CEE0D9009B965C /* GDataUnitTests.octest */,
+				8A4042EA17CEE0D9009B965C /* GDataIPhoneUnitTests.octest */,
+				8A4042EC17CEE0D9009B965C /* DevelopmentTestTool */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8A424AC517CB1D7800E2CF6C = {
 			isa = PBXGroup;
 			children = (
@@ -783,13 +836,15 @@
 		8A424C6517CB223C00E2CF6C /* Youtube */ = {
 			isa = PBXGroup;
 			children = (
-				C0111A7017CE176C00B5A9EE /* GData.xcodeproj */,
+				8A4042DB17CEE0D8009B965C /* GData.xcodeproj */,
 				8A424B2A17CB222300E2CF6C /* Headers */,
 				8A424C6917CB24B800E2CF6C /* GTMOAuth2ViewTouch.xib */,
 				8A424C6617CB225300E2CF6C /* YoutubeOAuth.h */,
 				8A424C6717CB225300E2CF6C /* YoutubeOAuth.m */,
 				8A424C6E17CB305200E2CF6C /* Youtube.h */,
 				8A424C6F17CB305200E2CF6C /* Youtube.m */,
+				8A4042ED17CF1B7C009B965C /* YoutubeConfig.h */,
+				8A4042EE17CF1B7C009B965C /* YoutubeConfig.m */,
 			);
 			name = Youtube;
 			sourceTree = "<group>";
@@ -830,16 +885,61 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 8A424AC517CB1D7800E2CF6C;
 			productRefGroup = 8A424ACF17CB1D7800E2CF6C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8A4042DC17CEE0D8009B965C /* Products */;
+					ProjectRef = 8A4042DB17CEE0D8009B965C /* GData.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8A424ACD17CB1D7800E2CF6C /* SampleTube */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8A4042E417CEE0D9009B965C /* GData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GData.framework;
+			remoteRef = 8A4042E317CEE0D9009B965C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A4042E617CEE0D9009B965C /* libGDataTouchStaticLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGDataTouchStaticLib.a;
+			remoteRef = 8A4042E517CEE0D9009B965C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A4042E817CEE0D9009B965C /* GDataUnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GDataUnitTests.octest;
+			remoteRef = 8A4042E717CEE0D9009B965C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A4042EA17CEE0D9009B965C /* GDataIPhoneUnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GDataIPhoneUnitTests.octest;
+			remoteRef = 8A4042E917CEE0D9009B965C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A4042EC17CEE0D9009B965C /* DevelopmentTestTool */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = DevelopmentTestTool;
+			remoteRef = 8A4042EB17CEE0D9009B965C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8A424ACC17CB1D7800E2CF6C /* Resources */ = {
@@ -869,6 +969,7 @@
 				8A424C6817CB225300E2CF6C /* YoutubeOAuth.m in Sources */,
 				8A424C7017CB305200E2CF6C /* Youtube.m in Sources */,
 				8AC870F817CC49AA00B4E94B /* STPostViewController.m in Sources */,
+				8A4042EF17CF1B7C009B965C /* YoutubeConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

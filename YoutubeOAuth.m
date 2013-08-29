@@ -7,11 +7,13 @@
 //
 
 #import "YoutubeOAuth.h"
+#import "YoutubeConfig.h"
 
 @implementation YoutubeOAuth
 
 #define GoogleAuthURL   @"https://accounts.google.com/o/oauth2/auth"
 #define GoogleTokenURL  @"https://accounts.google.com/o/oauth2/token"
+
 static YoutubeOAuth *sharedYoutubeOAuth = nil;
 
 + (YoutubeOAuth *)sharedYoutubeOAuth
@@ -43,9 +45,9 @@ static YoutubeOAuth *sharedYoutubeOAuth = nil;
     GTMOAuth2Authentication * auth = [GTMOAuth2Authentication authenticationWithServiceProvider:@"SampleTube"
                                                              tokenURL:tokenURL
                                                           redirectURI:redirectURI
-                                                             clientID:_googleClientID
-                                                         clientSecret:_googleClientSecret];
-    [auth setScope:[self scope]];
+                                                             clientID:kYoutubeOAuthClientID
+                                                         clientSecret:kYoutubeOAuthClientSecret];
+    [auth setScope:kYoutubeOAuthScope];
     return auth;
 }
 
@@ -57,11 +59,12 @@ static YoutubeOAuth *sharedYoutubeOAuth = nil;
 - (void)signIn
 {
     if([self isLogin]){
-        
+        NSString *checkParam = [self.authentication accessToken];
+        NSLog(@"オーソライズ%@",checkParam);
     }else{
         GTMOAuth2ViewControllerTouch *viewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:[self authForGoogle]
                                                                                                     authorizationURL:[self authorizationURL]
-                                                                                                    keychainItemName:[self keychainForName]
+                                                                                                    keychainItemName:kYoutubeOAuthKeychainForName
                                                                                                             delegate:self
                                                                                                     finishedSelector:@selector(viewController:finishedWithAuth:error:)];
         [_delegate youtubeOAuth:self didCreateAuth2ViewControllerTouch:viewController];
@@ -71,16 +74,16 @@ static YoutubeOAuth *sharedYoutubeOAuth = nil;
 - (void)signOut
 {
     if([self isLogin]){
-        [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:[self keychainForName]];
+        [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kYoutubeOAuthKeychainForName];
         [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.authentication];
     }
 }
 
 - (BOOL)isLogin
 {
-    GTMOAuth2Authentication *auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:[self keychainForName] clientID:[self googleClientID] clientSecret:[self googleClientSecret]];
+    NSLog(@"確認youtube%@",kYoutubeOAuthKeychainForName);
+    GTMOAuth2Authentication *auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kYoutubeOAuthKeychainForName clientID:kYoutubeOAuthClientID clientSecret:kYoutubeOAuthClientSecret];
     [self setAuthentication:auth];
-    
     if([auth canAuthorize]){
         return YES;
     }else{
