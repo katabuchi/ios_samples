@@ -28,10 +28,8 @@
     
     NSArray *viewControllers = @[self.navigationController,self.postViewController];
     [self.tabBarController setViewControllers:viewControllers];
-    
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
-    
     
     return YES;
 }

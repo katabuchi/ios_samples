@@ -24,24 +24,26 @@
 }
 
 //youtube再生リスト取得
-- (void)getFeedList
+- (void)getFeedList:(NSString *)searchString
 {
     GDataServiceGoogleYouTube *service = [self youtubeService];
     NSURL *feedURL = [GDataServiceGoogleYouTube youTubeURLForFeedID:nil];
     GDataQueryYouTube *query = [GDataQueryYouTube youTubeQueryWithFeedURL:feedURL];
     [query setStartIndex:1];
-    [query setMaxResults:8];
-    [query setAuthor:@"mototomizou"];
+    [query setMaxResults:10];
+    [query setVideoQuery:searchString];
     [query setOrderBy:@"published"];
     [service fetchFeedWithQuery:query
                        delegate:self
               didFinishSelector:@selector(request:finishedWithFeed:error:)
      ];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
 
 //再生リスト取得後のcallback Method
 - (void)request:(GDataServiceTicket *)ticket finishedWithFeed:(GDataFeedBase *)aFeed error:(NSError *)error {
     [_delegate youtube:self didRecieveList:ticket withFeed:aFeed error:error];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 //youtubeに動画をアップロード
@@ -112,8 +114,10 @@
     }
 }
 
+
 #pragma mark -
 #pragma mark ---- GDataServiceTicket CallBackMethod ----
+//動画のアップロード完了後にくるメソッド
 - (void)uploadTicket:(GDataServiceTicket *)ticket finishedWithEntry:(GDataEntryYouTubeVideo *)videoEntry error:(NSError *)error
 {
     if(error == nil){
@@ -121,23 +125,23 @@
     }else{
         NSLog(@"エラー%@",error);
     }
-    
     [self setUpLloadTicket:nil];
 }
 
+//動画転送中に、その都度くるメソッド
 - (void)ticket:(GDataServiceTicket *)ticket hasDeliveredByteCount:(unsigned long long)numberOfBytesRead ofTotalByteCount:(unsigned long long)dataLength
 {
     NSLog(@"データ転送中....");
     [_delegate youtube:self recievingDataTicket:ticket hasDeliveredByteCount:numberOfBytesRead ofTotalByteCount:dataLength];
 }
 
-
+//GDataServiceGoogleYoutubeの初期化、このクラスを元にアップロード、検索をしていく
 - (GDataServiceGoogleYouTube *)youtubeService
 {
     static GDataServiceGoogleYouTube *service = nil;
     if(!service){
         service = [[GDataServiceGoogleYouTube alloc] init];
-        [service setServiceShouldFollowNextLinks:YES];
+        [service setServiceShouldFollowNextLinks:NO];
         [service setIsServiceRetryEnabled:YES];
     }
     
@@ -148,7 +152,6 @@
                                        password:nil
          ];
     }
-    
     NSString *devKey =  kYoutubeDeveloperKey;
     [service setYouTubeDeveloperKey:devKey];
 
@@ -156,23 +159,6 @@
 }
 
 
-- (void)ticket:(GDataServiceTicket *)ticket finishedWithFeed:(GDataFeedCalendar *)feed error:(NSError *)error {
-    if (error == nil) {
-        NSArray *entries = [feed entries];
-        if ([entries count] > 0) {
-            
-            GDataEntryCalendar *firstCalendar = [entries objectAtIndex:0];
-            GDataTextConstruct *titleTextConstruct = [firstCalendar title];
-            NSString *title = [titleTextConstruct stringValue];
-            
-            NSLog(@"first movies title: %@", title);
-        } else {
-            NSLog(@"the user has no calendars");
-        }
-    } else {
-        NSLog(@"fetch error: %@", error);
-    }
-}
 
 
 

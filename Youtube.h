@@ -31,6 +31,5 @@
 @property (nonatomic, strong) NSString *accessToken;
 
 - (void)upLoadVideoFilePath:(NSString *)movieURL parameters:(NSDictionary *)parameters;
-- (void)getFeedList;
-
+- (void)getFeedList:(NSString *)searchString;
 @end

@@ -16,5 +16,6 @@
     YoutubeOAuth *youtubeOAuth;
     Youtube *testTube;
     NSMutableArray *entries;
+    BOOL isEditMode;
 }
 @end

@@ -27,6 +27,7 @@
 		8A424C7017CB305200E2CF6C /* Youtube.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A424C6F17CB305200E2CF6C /* Youtube.m */; };
 		8A5357EE17CD965F00810271 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5357ED17CD965F00810271 /* QuartzCore.framework */; };
 		8A5357F417CDB23A00810271 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5357F317CDB23A00810271 /* AVFoundation.framework */; };
+		8AB5570A17CF2F3B00F09ECE /* STYoutubeStreamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5570917CF2F3B00F09ECE /* STYoutubeStreamingViewController.m */; };
 		8AC870F817CC49AA00B4E94B /* STPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC870F717CC49AA00B4E94B /* STPostViewController.m */; };
 		C0111A8317CE17AB00B5A9EE /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0111A8217CE17AB00B5A9EE /* libGDataTouchStaticLib.a */; };
 /* End PBXBuildFile section */
@@ -413,6 +414,8 @@
 		8A424C6F17CB305200E2CF6C /* Youtube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Youtube.m; sourceTree = "<group>"; };
 		8A5357ED17CD965F00810271 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8A5357F317CDB23A00810271 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8AB5570817CF2F3B00F09ECE /* STYoutubeStreamingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STYoutubeStreamingViewController.h; sourceTree = "<group>"; };
+		8AB5570917CF2F3B00F09ECE /* STYoutubeStreamingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STYoutubeStreamingViewController.m; sourceTree = "<group>"; };
 		8AC870F617CC49AA00B4E94B /* STPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPostViewController.h; sourceTree = "<group>"; };
 		8AC870F717CC49AA00B4E94B /* STPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPostViewController.m; sourceTree = "<group>"; };
 		C0111A8217CE17AB00B5A9EE /* libGDataTouchStaticLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGDataTouchStaticLib.a; path = "../../../../../Documents/Xcode/library/youtube/gdata-objc-client/Source/build/Release-iphoneos/libGDataTouchStaticLib.a"; sourceTree = "<group>"; };
@@ -489,6 +492,8 @@
 				8A424AE117CB1D7800E2CF6C /* STAppDelegate.m */,
 				8A424AE917CB1D7800E2CF6C /* STViewController.h */,
 				8A424AEA17CB1D7800E2CF6C /* STViewController.m */,
+				8AB5570817CF2F3B00F09ECE /* STYoutubeStreamingViewController.h */,
+				8AB5570917CF2F3B00F09ECE /* STYoutubeStreamingViewController.m */,
 				8A424AEC17CB1D7800E2CF6C /* STViewController_iPhone.xib */,
 				8A424AEF17CB1D7800E2CF6C /* STViewController_iPad.xib */,
 				8AC870F617CC49AA00B4E94B /* STPostViewController.h */,
@@ -970,6 +975,7 @@
 				8A424C7017CB305200E2CF6C /* Youtube.m in Sources */,
 				8AC870F817CC49AA00B4E94B /* STPostViewController.m in Sources */,
 				8A4042EF17CF1B7C009B965C /* YoutubeConfig.m in Sources */,
+				8AB5570A17CF2F3B00F09ECE /* STYoutubeStreamingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

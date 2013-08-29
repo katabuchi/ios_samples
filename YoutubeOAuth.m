@@ -59,8 +59,7 @@ static YoutubeOAuth *sharedYoutubeOAuth = nil;
 - (void)signIn
 {
     if([self isLogin]){
-        NSString *checkParam = [self.authentication accessToken];
-        NSLog(@"オーソライズ%@",checkParam);
+        
     }else{
         GTMOAuth2ViewControllerTouch *viewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:[self authForGoogle]
                                                                                                     authorizationURL:[self authorizationURL]
@@ -81,7 +80,6 @@ static YoutubeOAuth *sharedYoutubeOAuth = nil;
 
 - (BOOL)isLogin
 {
-    NSLog(@"確認youtube%@",kYoutubeOAuthKeychainForName);
     GTMOAuth2Authentication *auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kYoutubeOAuthKeychainForName clientID:kYoutubeOAuthClientID clientSecret:kYoutubeOAuthClientSecret];
     [self setAuthentication:auth];
     if([auth canAuthorize]){

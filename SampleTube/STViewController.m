@@ -10,6 +10,7 @@
 #import "YoutubeOAuth.h"
 #import "Youtube.h"
 #import "GData.h"
+#import "STYoutubeStreamingViewController.h"
 
 @interface STViewController ()<YoutubeDelegate,YoutubeOAuthDelegate>
 
@@ -17,28 +18,42 @@
 
 @implementation STViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self setTabBarItem:[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:0]];
+        isEditMode = NO;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTabBarItem:[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:0]];
     UISearchBar *searchBar = [[UISearchBar alloc] init];
+    [searchBar setShowsCancelButton:YES];
     [searchBar setDelegate:self];
     [self.navigationItem setTitleView:searchBar];
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(onClickEditButton)]];
     [self.navigationItem.titleView setFrame:CGRectMake(0, 0, 320, 44)];
     [self.view addSubview:[[self tableViewController] view]];
-    
-    testTube = [[Youtube alloc] init];
-    [testTube setDelegate:self];
-    [testTube getFeedList];
     
     youtubeOAuth = [YoutubeOAuth sharedYoutubeOAuth];
     [youtubeOAuth setDelegate:self];
     [youtubeOAuth signIn];
+    
+    testTube = [[Youtube alloc] init];
+    [testTube setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (UITableViewController *)tableViewController
@@ -57,35 +72,61 @@
 #pragma mark ---- UITableViewDelegateMethod ----
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [entries count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    STYoutubeStreamingViewController *detailController = [[STYoutubeStreamingViewController alloc] init];
+    GDataEntryBase *entry2 = [entries objectAtIndex:indexPath.row];
+    NSString *title = [[entry2 title] stringValue];
+    NSArray *contents = [[(GDataEntryYouTubeVideo *)entry2 mediaGroup] mediaContents];
+    GDataMediaContent *flashContent = [GDataUtilities firstObjectFromArray:contents withValue:@"application/x-shockwave-flash" forKeyPath:@"type"];
+    NSString *tempURL = [flashContent URLString];
+    NSString *description = [[[(GDataEntryYouTubeVideo *)entry2 mediaGroup] mediaDescription] contentStringValue];
+    [detailController setVideoString:tempURL];
+    [detailController setTitleString:title];
+    [detailController setDescriptionString:description];
     
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    GDataFeedBase *entry = [entries objectAtIndex:indexPath.section];
+    static NSString *CellIdentifire = @"YoutubeCell";
+    UITableViewCell *cell = [tableViewController.tableView dequeueReusableCellWithIdentifier:CellIdentifire];
+    if(!cell){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifire];
+    }
+    GDataFeedBase *entry = [entries objectAtIndex:indexPath.row];
     NSArray *thumnails = [[(GDataEntryYouTubeVideo *)entry mediaGroup] mediaThumbnails];
-    NSString *urlString = [[thumnails objectAtIndex:0] URLString];
+    NSString *urlString = [[thumnails objectAtIndex:1] URLString];
     NSData *resorce = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
     UIImage *image = [UIImage imageWithData:resorce];
     [cell.imageView setImage:image];
     [cell.textLabel setText:[[entry title] stringValue]];
+    [cell.textLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [cell.textLabel setNumberOfLines:0];
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [entries count];
+    return 1;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete){
+        [entries removeObjectAtIndex:indexPath.row];
+        [tableViewController.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 #pragma mark -
@@ -93,8 +134,25 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
+    NSString *searchString = [searchBar text];
+    [testTube getFeedList:searchString];
 }
 
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
+- (void)onClickEditButton
+{
+    if(!isEditMode){
+        isEditMode = YES;
+        [tableViewController.tableView setEditing:YES animated:YES];
+    }else{
+        isEditMode = NO;
+        [tableViewController.tableView setEditing:NO animated:YES];
+    }
+}
 
 #pragma mark -
 #pragma mark ----- YoutubeOAuth DelegateMethod ----
@@ -142,11 +200,6 @@
         entries = [[NSMutableArray alloc] init];
         [entries setArray:feeds.entries];
         [tableViewController.tableView reloadData];
-        
-        //Sample
-        GDataFeedBase *entry = [[feeds entries] objectAtIndex:0];
-        NSString *description = [[[(GDataEntryYouTubeVideo *)entry mediaGroup] mediaDescription] contentStringValue];
-        NSLog(@"descriptionを確認 -> %@",description);
     }
 }
 
