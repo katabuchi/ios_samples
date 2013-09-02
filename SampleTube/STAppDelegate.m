@@ -9,6 +9,8 @@
 #import "STAppDelegate.h"
 #import "STPostViewController.h"
 #import "STViewController.h"
+#import "STSettingViewController.h"
+#import "STFavoriteViewController.h"
 
 @implementation STAppDelegate
 
@@ -25,8 +27,13 @@
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     self.tabBarController = [[UITabBarController alloc] init];
     self.postViewController = [[STPostViewController alloc] init];
+    self.navigationController2 = [[UINavigationController alloc] initWithRootViewController:self.postViewController];
+    self.settingViewController = [[STSettingViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *settingNavigationController = [[UINavigationController alloc] initWithRootViewController:self.settingViewController];
+    self.favoriteViewController = [[STFavoriteViewController alloc] initWithStyle:UITableViewStylePlain];
+    UINavigationController *favoriteNavigationController = [[UINavigationController alloc] initWithRootViewController:self.favoriteViewController];
     
-    NSArray *viewControllers = @[self.navigationController,self.postViewController];
+    NSArray *viewControllers = @[self.navigationController ,self.navigationController2, favoriteNavigationController, settingNavigationController];
     [self.tabBarController setViewControllers:viewControllers];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];

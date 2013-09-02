@@ -12,5 +12,7 @@
 {
     UIImageView *photoView;
     NSString *moviePath;
+    UIPopoverController *popController;
+    BOOL isShowCamra;
 }
 @end

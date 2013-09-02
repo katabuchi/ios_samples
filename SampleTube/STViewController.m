@@ -22,7 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self setTabBarItem:[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:0]];
+        [self setTabBarItem:[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0]];
         isEditMode = NO;
     }
     return self;
@@ -34,8 +34,8 @@
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     [searchBar setShowsCancelButton:YES];
     [searchBar setDelegate:self];
+    [searchBar setPlaceholder:@"Search..."];
     [self.navigationItem setTitleView:searchBar];
-    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(onClickEditButton)]];
     [self.navigationItem.titleView setFrame:CGRectMake(0, 0, 320, 44)];
     [self.view addSubview:[[self tableViewController] view]];
     
@@ -78,16 +78,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     STYoutubeStreamingViewController *detailController = [[STYoutubeStreamingViewController alloc] init];
-    GDataEntryBase *entry2 = [entries objectAtIndex:indexPath.row];
-    NSString *title = [[entry2 title] stringValue];
-    NSArray *contents = [[(GDataEntryYouTubeVideo *)entry2 mediaGroup] mediaContents];
+    GDataEntryBase *entry = [entries objectAtIndex:indexPath.row];
+    NSString *title = [[entry title] stringValue];
+    NSArray *contents = [[(GDataEntryYouTubeVideo *)entry mediaGroup] mediaContents];
     GDataMediaContent *flashContent = [GDataUtilities firstObjectFromArray:contents withValue:@"application/x-shockwave-flash" forKeyPath:@"type"];
     NSString *tempURL = [flashContent URLString];
-    NSString *description = [[[(GDataEntryYouTubeVideo *)entry2 mediaGroup] mediaDescription] contentStringValue];
+    NSString *description = [[[(GDataEntryYouTubeVideo *)entry mediaGroup] mediaDescription] contentStringValue];
     [detailController setVideoString:tempURL];
     [detailController setTitleString:title];
     [detailController setDescriptionString:description];
-    
+    [detailController setEntryBase:entry];
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
@@ -115,12 +115,6 @@
     return 1;
 }
 
-
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    
-}
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(editingStyle == UITableViewCellEditingStyleDelete){
@@ -141,17 +135,6 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
-}
-
-- (void)onClickEditButton
-{
-    if(!isEditMode){
-        isEditMode = YES;
-        [tableViewController.tableView setEditing:YES animated:YES];
-    }else{
-        isEditMode = NO;
-        [tableViewController.tableView setEditing:NO animated:YES];
-    }
 }
 
 #pragma mark -

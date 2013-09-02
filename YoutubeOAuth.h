@@ -24,8 +24,6 @@
 @property (nonatomic, weak) id<YoutubeOAuthDelegate>delegate;
 
 + (YoutubeOAuth *)sharedYoutubeOAuth;
-- (GTMOAuth2Authentication *)authForGoogle;
-- (NSURL *)authorizationURL;
 - (void)signIn;
 - (void)signOut;
 - (BOOL)isLogin;

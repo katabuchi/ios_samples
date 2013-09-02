@@ -22,7 +22,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self setTabBarItem:[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:1]];
+        [self setTabBarItem:[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:1]];
+        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(onClickCameraButton:withEvent:)]];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onClickPostButton:withEvent:)]];
+        [self setTitle:@"投稿"];
     }
     return self;
 }
@@ -43,27 +46,13 @@
 
 - (void)_createView
 {
-    CGFloat buttonWidth = 100;
-    CGFloat buttonHeight = 30;
     CGFloat photoViewAreaWidth = 300;
     CGFloat photoViewAreaHeight = 250;
     CGFloat marginTop = 20;
-    CGFloat marginLeft = 10;
     
     photoView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width-photoViewAreaWidth)/2, marginTop, photoViewAreaWidth, photoViewAreaHeight)];
     [photoView setBackgroundColor:[UIColor blackColor]];
     [photoView setContentMode:UIViewContentModeScaleAspectFit];
-    
-    UIButton *cameraButton = [self _createCustomButton:@"カメラ"];
-    [cameraButton setFrame:CGRectMake((self.view.frame.size.width - buttonWidth*2 - marginLeft)/2, photoView.frame.size.height+photoView.frame.origin.y+marginTop, buttonWidth, buttonHeight)];
-    [cameraButton addTarget:self action:@selector(onClickCameraButton:withEvent:) forControlEvents:UIControlEventTouchDown];
-    
-    UIButton *postButton = [self _createCustomButton:@"投稿"];
-    [postButton setFrame:CGRectMake(cameraButton.frame.origin.x+cameraButton.frame.size.width+marginLeft, photoView.frame.size.height+photoView.frame.origin.y+marginTop, buttonWidth, buttonHeight)];
-    [postButton addTarget:self action:@selector(onClickPostButton:withEvent:) forControlEvents:UIControlEventTouchDown];
-    
-    [self.view addSubview:cameraButton];
-    [self.view addSubview:postButton];
     [self.view addSubview:photoView];
 }
 
@@ -83,15 +72,28 @@
 {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     [imagePicker setDelegate:self];
+    
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }else{
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
-    [self presentViewController:imagePicker animated:YES completion:^{
-        
-    }];
+    
     [imagePicker setMediaTypes:@[@"public.movie",@"public.image"]];
+    if(UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad){
+        if([popController isPopoverVisible]){
+            return;
+        }
+        popController = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+        [popController presentPopoverFromBarButtonItem:sender
+                              permittedArrowDirections:UIPopoverArrowDirectionAny
+                                              animated:YES
+         ];
+    }else{        
+        [self presentViewController:imagePicker animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (void)onClickPostButton:(id)sender withEvent:(UIEvent *)event

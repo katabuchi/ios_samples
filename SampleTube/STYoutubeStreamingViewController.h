@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class GDataEntryBase;
 @interface STYoutubeStreamingViewController : UIViewController
 {
     UIWebView *mainWebViwe;
@@ -15,5 +16,6 @@
 @property (nonatomic, strong) NSString *videoString;
 @property (nonatomic, strong) NSString *titleString;
 @property (nonatomic, strong) NSString *descriptionString;
+@property (nonatomic, strong) GDataEntryBase *entryBase;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class STViewController, STPostViewController;
+@class STViewController, STPostViewController, STSettingViewController, STFavoriteViewController;
 
 @interface STAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,5 +17,8 @@
 @property (strong, nonatomic) UINavigationController *navigationController;
 @property (strong, nonatomic) UITabBarController *tabBarController;
 @property (strong, nonatomic) STPostViewController *postViewController;
+@property (strong, nonatomic) UINavigationController *navigationController2;
+@property (strong, nonatomic) STSettingViewController *settingViewController;
+@property (strong, nonatomic) STFavoriteViewController *favoriteViewController;
 
 @end
