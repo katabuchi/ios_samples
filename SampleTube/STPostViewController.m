@@ -13,7 +13,7 @@
 #import "Youtube.h"
 
 @interface STPostViewController ()<YoutubeOAuthDelegate>
-
+    
 @end
 
 @implementation STPostViewController
@@ -104,7 +104,11 @@
         NSLog(@"ログイン済み");
         Youtube *youtube = [[Youtube alloc] init];
         [youtube setAuthentication:[youtubeOAuth authentication]];
-        NSDictionary *parameters = @{@"title": @"test", @"category": @"Sports", @"description": @"test", @"keyword": @"test"};
+        //アップロードするパラメーターを設定しておくところ
+        NSDictionary *parameters = @{@"title": @"test",
+                                     @"category": @"Sports",
+                                     @"description": @"test",
+                                     @"keyword": @"test"};
         [youtube upLoadVideoFilePath:moviePath parameters:parameters];
     }else{
         [youtubeOAuth signIn];

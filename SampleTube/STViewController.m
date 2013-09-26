@@ -173,7 +173,6 @@
 - (void)youtube:(Youtube *)youtube didRecieveData:(NSData *)data
 {
     NSDictionary *json = [GTMOAuth2Authentication dictionaryWithJSONData:data];
-    NSLog(@"確認%@",json);
 }
 
 - (void)youtube:(Youtube *)youtube didRecieveList:(GDataServiceTicket *)ticket withFeed:(GDataFeedBase *)aFeed error:(NSError *)error

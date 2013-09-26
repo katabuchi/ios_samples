@@ -31,7 +31,6 @@
     [mainWebViwe setFrame:self.view.bounds];
     [self.view addSubview:mainWebViwe];
     [self configureView];
-    NSLog(@"詳細を調べる%@",self.descriptionString);
 }
 
 - (void) displayGoogleVideo:(NSString *)urlString frame:(CGRect)frame
@@ -59,7 +58,6 @@
 
 - (void)onClickAddButton:(id)sender withEvent:(UIEvent *)event
 {
-    NSLog(@"気にいったyoutubeの動画を保存しておくところ");
     
 }
 
