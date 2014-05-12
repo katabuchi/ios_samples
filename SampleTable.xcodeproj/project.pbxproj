@@ -85,6 +85,9 @@
 		8A5BD00A179940B200F098CD /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BCFDA179940B200F098CD /* b2Rope.cpp */; };
 		8A5BD00D17994EE500F098CD /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5BD00C17994EE500F098CD /* Camera.m */; };
 		8A5BD00F17994F3300F098CD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5BD00E17994F3300F098CD /* AVFoundation.framework */; };
+		8A5DABE417F1307D00D6C92A /* SPRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5DABE317F1307D00D6C92A /* SPRootViewController.m */; };
+		8A5DABE717F130B500D6C92A /* SPFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5DABE617F130B500D6C92A /* SPFirstViewController.m */; };
+		8A5DABEA17F130C000D6C92A /* SPSecoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5DABE917F130C000D6C92A /* SPSecoundViewController.m */; };
 		8A76748F17C358140008D534 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A76748E17C358140008D534 /* Customer.m */; };
 /* End PBXBuildFile section */
 
@@ -228,6 +231,12 @@
 		8A5BD00B17994EE500F098CD /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		8A5BD00C17994EE500F098CD /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		8A5BD00E17994F3300F098CD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8A5DABE217F1307D00D6C92A /* SPRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPRootViewController.h; sourceTree = "<group>"; };
+		8A5DABE317F1307D00D6C92A /* SPRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPRootViewController.m; sourceTree = "<group>"; };
+		8A5DABE517F130B500D6C92A /* SPFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPFirstViewController.h; sourceTree = "<group>"; };
+		8A5DABE617F130B500D6C92A /* SPFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPFirstViewController.m; sourceTree = "<group>"; };
+		8A5DABE817F130C000D6C92A /* SPSecoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSecoundViewController.h; sourceTree = "<group>"; };
+		8A5DABE917F130C000D6C92A /* SPSecoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSecoundViewController.m; sourceTree = "<group>"; };
 		8A76748D17C358140008D534 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		8A76748E17C358140008D534 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -314,6 +323,7 @@
 		8A5BCEB51798D80A00F098CD /* SampleTable */ = {
 			isa = PBXGroup;
 			children = (
+				8A5DABE117F12F5D00D6C92A /* changeViewController */,
 				8A217AF3179FB8B20034523D /* CoreData */,
 				8A217AED179F9B280034523D /* CoreMotionSample */,
 				8A5BCF7317993F3400F098CD /* Box2DSample */,
@@ -537,6 +547,19 @@
 			path = Rope;
 			sourceTree = "<group>";
 		};
+		8A5DABE117F12F5D00D6C92A /* changeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8A5DABE217F1307D00D6C92A /* SPRootViewController.h */,
+				8A5DABE317F1307D00D6C92A /* SPRootViewController.m */,
+				8A5DABE517F130B500D6C92A /* SPFirstViewController.h */,
+				8A5DABE617F130B500D6C92A /* SPFirstViewController.m */,
+				8A5DABE817F130C000D6C92A /* SPSecoundViewController.h */,
+				8A5DABE917F130C000D6C92A /* SPSecoundViewController.m */,
+			);
+			name = changeViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -667,6 +690,9 @@
 				8A217AFE179FBB8B0034523D /* SPCoreData.m in Sources */,
 				8A5B961D17A0C3CA00D32BC7 /* SPCoreImageViewController.m in Sources */,
 				8A76748F17C358140008D534 /* Customer.m in Sources */,
+				8A5DABE417F1307D00D6C92A /* SPRootViewController.m in Sources */,
+				8A5DABE717F130B500D6C92A /* SPFirstViewController.m in Sources */,
+				8A5DABEA17F130C000D6C92A /* SPSecoundViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

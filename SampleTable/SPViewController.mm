@@ -16,6 +16,7 @@
 #import "SPCoreMotion.h"
 #import "SPCoreData.h"
 #import "SPCoreImageViewController.h"
+#import "SPRootViewController.h"
 
 @interface SPViewController ()
 
@@ -125,7 +126,7 @@
             }else if(indexPath.row == 1){
                 [cell.textLabel setText:@"Core Data"];
             }else if(indexPath.row == 2){
-                [cell.textLabel setText:@"Sample03"];
+                [cell.textLabel setText:@"ChangeViewController"];
             }else if(indexPath.row == 3){
                 [cell.textLabel setText:@"Sample04"];
             }
@@ -254,6 +255,11 @@
             SPCoreData *coreData = [[SPCoreData alloc] init];
             [coreData setManagedObjectContext:appDelegate.managedObjectContext];
             [appDelegate.navigationController pushViewController:coreData animated:YES];
+        }
+        case 2:
+        {
+            SPRootViewController *rootViewController = [[SPRootViewController alloc] init];
+            [appDelegate.navigationController pushViewController:rootViewController animated:YES];
         }
         default:
             break;
