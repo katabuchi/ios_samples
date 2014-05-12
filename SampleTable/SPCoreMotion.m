@@ -16,60 +16,67 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    // Custom initialization
+  }
+  return self;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+  [super viewDidLoad];
+  [self.view setBackgroundColor:[UIColor whiteColor]];
 	// Do any additional setup after loading the view.
-    [self _createContents];
-    [self _settingCoreMotion];
+  [self _createContents];
+  [self _settingCoreMotion];
 }
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  NSLog(@"遷移完了");
+  [motionManager stopAccelerometerUpdates];
 }
 
 #pragma mark -
 #pragma mark ---- PrivateMethod ----
 - (void)_settingCoreMotion
 {
-    motionManager = [[CMMotionManager alloc] init];
-    [motionManager setAccelerometerUpdateInterval:0.1f];
-    if(motionManager.isAccelerometerAvailable){
-        [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-            double x = accelerometerData.acceleration.x*100;
-            double y = accelerometerData.acceleration.y*100;
-            double z = accelerometerData.acceleration.z*100;
-            CGFloat posX = self.view.frame.size.width/2 + x;
-            CGFloat posY = self.view.frame.size.height/2 - y;
-            CGFloat contentsSize = 100 - z;
-            CGRect rect = moveView.frame;
-            rect.size = CGSizeMake(contentsSize, contentsSize);
-            [UIView animateWithDuration:0.1f animations:^{
-                moveView.frame = rect;
-                [moveView setCenter:CGPointMake(posX, posY)];
-            }];
-        }];
-    }
+  motionManager = [[CMMotionManager alloc] init];
+  [motionManager setAccelerometerUpdateInterval:0.1f];
+  if(motionManager.isAccelerometerAvailable){
+    [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+      double x = accelerometerData.acceleration.x*100;
+      double y = accelerometerData.acceleration.y*100;
+      double z = accelerometerData.acceleration.z*100;
+      CGFloat posX = self.view.frame.size.width/2 + x;
+      CGFloat posY = self.view.frame.size.height/2 - y;
+      CGFloat contentsSize = 100 - z;
+      CGRect rect = moveView.frame;
+      rect.size = CGSizeMake(contentsSize, contentsSize);
+      [UIView animateWithDuration:0.1f animations:^{
+        moveView.frame = rect;
+        [moveView setCenter:CGPointMake(posX, posY)];
+      }];
+    }];
+  }
 }
 
 - (void)_createContents
 {
-    //動かすオブジェクトを配置しておく
-    moveView = [[UIView alloc] init];
-    [moveView setBackgroundColor:[UIColor blackColor]];
-    [moveView setFrame:CGRectMake(0, 0, 100, 100)];
-    [moveView setCenter:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2)];
-    [self.view addSubview:moveView];
+  //動かすオブジェクトを配置しておく
+  moveView = [[UIView alloc] init];
+  [moveView setBackgroundColor:[UIColor blackColor]];
+  [moveView setFrame:CGRectMake(0, 0, 100, 100)];
+  [moveView setCenter:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2)];
+  [self.view addSubview:moveView];
 }
 
 @end
